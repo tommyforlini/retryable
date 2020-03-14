@@ -10,12 +10,12 @@ import (
 
 func TestSuccess(t *testing.T) {
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 1,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
 		return nil
 	})
 
@@ -24,12 +24,12 @@ func TestSuccess(t *testing.T) {
 
 func TestSuccessExternalizedFunction(t *testing.T) {
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 1,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
 		return MyCoolFunction()
 	})
 
@@ -42,12 +42,12 @@ func MyCoolFunction() error {
 
 func TestMaxAttemptsExhausted(t *testing.T) {
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 1,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
 		return errors.New("It failed")
 	})
 
@@ -61,12 +61,12 @@ func TestMaxAttemptsExhausted(t *testing.T) {
 
 func TestUnrecoverableError(t *testing.T) {
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 1,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
 		return Unrecoverable(errors.New("It failed with unrecoverable error"))
 	})
 

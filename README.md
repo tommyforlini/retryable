@@ -16,12 +16,12 @@ Final result will be 1 execution with a success.
 
 ```golang
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 5,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
         fmt.Println(`
         My cool function will only execute 
         once because no error occurred!`)
@@ -36,12 +36,12 @@ Final result will be 2 executions with a failed.
 
 ```golang
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 5,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
         fmt.Println(`
         My cool function will execute 2 times
         because an error occurred during each call
@@ -57,12 +57,12 @@ Final result will be 1 execution with a failed.
 
 ```golang
 
-	config := &Config{
+	retryable := &Config{
 		maxAttempts: 2,
 		delay:       time.Second * 5,
 	}
 
-	err := config.Try(func() error {
+	err := retryable.Try(func() error {
         fmt.Println(`
         My cool function will execute 1 times
         because an UNRECOVERABLE error occurred during 
