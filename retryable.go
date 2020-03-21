@@ -4,8 +4,14 @@ import (
 	"time"
 )
 
-// Config represents the retryable options
-type Config struct {
+var (
+	// Default retry configuration
+	defaultDelay       = 5 * time.Second
+	defaultMaxAttempts = 5
+)
+
+// Client represents the retryable options
+type Client struct {
 	maxAttempts int
 	delay       time.Duration
 }
@@ -18,8 +24,16 @@ type retryable interface {
 // RetryableFunc represents the function that is attempted to be retryable
 type retryableFunc func() error
 
+// NewClient creates a new Client with default settings.
+func NewClient() *Client {
+	return &Client{
+		maxAttempts: defaultMaxAttempts,
+		delay:       defaultDelay,
+	}
+}
+
 // Try is the core piece of functionality
-func (c *Config) Try(retryableFunc retryableFunc) error {
+func (c *Client) Try(retryableFunc retryableFunc) error {
 	var iteration int
 
 	errorLog := make(Error, c.maxAttempts)
