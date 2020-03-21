@@ -2,10 +2,23 @@
 
 Abstracted way to enable retry mechanisms for any function
 
-## Usage
 
-- Set a `maxAttempts` value which is to be used in the retryable logic
-- Set a `delay` value to wait before executing the retryable function
+## Usage 
+
+Helper function to create a default Client 
+
+```golang
+
+err := NewClient().Try(func() error {
+	...
+})
+
+```
+
+### Override defaults
+
+- _(Optional)_ Set a `maxAttempts` value which is to be used in the retryable logic
+- _(Optional)_ Set a `delay` value to wait before executing the retryable function
 
 ## Sample 1 
 
@@ -16,10 +29,15 @@ Final result will be 1 execution with a success.
 
 ```golang
 
-	retryable := &Config{
-		maxAttempts: 2,
-		delay:       time.Second * 5,
-	}
+	retryable := NewClient()
+	retryable.maxAttempts = 2
+	retryable.delay =time.Second * 5
+
+    // OR
+	// retryable := &Config{
+	// 	maxAttempts: 2,
+	// 	delay:       time.Second * 5,
+	// }
 
 	err := retryable.Try(func() error {
         fmt.Println(`
@@ -36,10 +54,15 @@ Final result will be 2 executions with a failed.
 
 ```golang
 
-	retryable := &Config{
-		maxAttempts: 2,
-		delay:       time.Second * 5,
-	}
+	retryable := NewClient()
+	retryable.maxAttempts = 2
+	retryable.delay =time.Second * 5
+
+    // OR
+	// retryable := &Config{
+	// 	maxAttempts: 2,
+	// 	delay:       time.Second * 5,
+	// }
 
 	err := retryable.Try(func() error {
         fmt.Println(`
@@ -57,10 +80,15 @@ Final result will be 1 execution with a failed.
 
 ```golang
 
-	retryable := &Config{
-		maxAttempts: 2,
-		delay:       time.Second * 5,
-	}
+	retryable := NewClient()
+	retryable.maxAttempts = 2
+	retryable.delay =time.Second * 5
+
+    // OR
+	// retryable := &Config{
+	// 	maxAttempts: 2,
+	// 	delay:       time.Second * 5,
+	// }
 
 	err := retryable.Try(func() error {
         fmt.Println(`
