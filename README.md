@@ -2,10 +2,9 @@
 
 Abstracted way to enable retry mechanisms for any function
 
+## Usage
 
-## Usage 
-
-Helper function to create a default Client 
+Helper function to create a default Client
 
 ```golang
 
@@ -24,7 +23,7 @@ err := retryable.NewClient().Try(func() error {
 - _(Optional)_ Set a `maxAttempts` value which is to be used in the retryable logic `#SetMaxAttempts(int)`
 - _(Optional)_ Set a `delay` value to wait before executing the retryable function `#SetDelay(time.Duration)`
 
-## Sample 1 
+## Sample 1
 
 ### - Anonymous function with no error
 
@@ -36,12 +35,6 @@ Final result will be 1 execution with a success.
 	retryable := retryable.NewClient()
 	retryable.SetMaxAttempts(2)
 	retryable.SetDelay(time.Second * 5)
-
-	// OR
-	// retryable := &Config{
-	// 	maxAttempts: 2,
-	// 	delay:       time.Second * 5,
-	// }
 
 	err := retryable.Try(func() error {
         fmt.Println(`
@@ -62,12 +55,6 @@ Final result will be 2 executions with a failed.
 	retryable.SetMaxAttempts(2)
 	retryable.SetDelay(time.Second * 5)
 
-	// OR
-	// retryable := &Config{
-	// 	maxAttempts: 2,
-	// 	delay:       time.Second * 5,
-	// }
-
 	err := retryable.Try(func() error {
         fmt.Println(`
         My cool function will execute 2 times
@@ -87,12 +74,6 @@ Final result will be 1 execution with a failed.
 	retryable := retryable.NewClient()
 	retryable.SetMaxAttempts(2)
 	retryable.SetDelay(time.Second * 5)
-
-	// OR
-	// retryable := &Config{
-	// 	maxAttempts: 2,
-	// 	delay:       time.Second * 5,
-	// }
 
 	err := retryable.Try(func() error {
         fmt.Println(`
