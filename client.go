@@ -32,6 +32,16 @@ func NewClient() *Client {
 	}
 }
 
+// SetMaxAttempts sets maxAttempts
+func (c *Client) SetMaxAttempts(v int) {
+	c.maxAttempts = v
+}
+
+// SetDelay sets maxAttempts
+func (c *Client) SetDelay(v time.Duration) {
+	c.delay = v
+}
+
 // Try is the core piece of functionality
 func (c *Client) Try(retryableFunc retryableFunc) error {
 	var iteration int
