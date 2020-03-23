@@ -10,10 +10,9 @@ import (
 
 func TestSuccess(t *testing.T) {
 
-	retryable := &Client{
-		maxAttempts: 2,
-		delay:       time.Second * 1,
-	}
+	retryable := NewClient()
+	retryable.SetDelay(time.Second * 1)
+	retryable.SetMaxAttempts(2)
 
 	err := retryable.Try(func() error {
 		return nil
@@ -33,10 +32,9 @@ func TestSuccessWithDefault(t *testing.T) {
 
 func TestSuccessExternalizedFunction(t *testing.T) {
 
-	retryable := &Client{
-		maxAttempts: 2,
-		delay:       time.Second * 1,
-	}
+	retryable := NewClient()
+	retryable.SetDelay(time.Second * 1)
+	retryable.SetMaxAttempts(2)
 
 	err := retryable.Try(func() error {
 		return MyCoolFunction()
@@ -51,10 +49,9 @@ func MyCoolFunction() error {
 
 func TestMaxAttemptsExhausted(t *testing.T) {
 
-	retryable := &Client{
-		maxAttempts: 2,
-		delay:       time.Second * 1,
-	}
+	retryable := NewClient()
+	retryable.SetDelay(time.Second * 1)
+	retryable.SetMaxAttempts(2)
 
 	err := retryable.Try(func() error {
 		return errors.New("It failed")
@@ -90,10 +87,9 @@ func TestMaxAttemptsExhaustedWithDefaultsDelayOverride(t *testing.T) {
 
 func TestUnrecoverableError(t *testing.T) {
 
-	retryable := &Client{
-		maxAttempts: 2,
-		delay:       time.Second * 1,
-	}
+	retryable := NewClient()
+	retryable.SetDelay(time.Second * 1)
+	retryable.SetMaxAttempts(2)
 
 	err := retryable.Try(func() error {
 		return Unrecoverable(errors.New("It failed with unrecoverable error"))
