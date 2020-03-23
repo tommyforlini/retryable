@@ -9,7 +9,11 @@ Helper function to create a default Client
 
 ```golang
 
-err := NewClient().Try(func() error {
+import (
+	"github.com/tommyforlini/retryable"
+)
+
+err := retryable.NewClient().Try(func() error {
 	...
 })
 
@@ -29,11 +33,11 @@ Final result will be 1 execution with a success.
 
 ```golang
 
-	retryable := NewClient()
+	retryable := retryable.NewClient()
 	retryable.maxAttempts = 2
 	retryable.delay =time.Second * 5
 
-    // OR
+	// OR
 	// retryable := &Config{
 	// 	maxAttempts: 2,
 	// 	delay:       time.Second * 5,
@@ -54,11 +58,11 @@ Final result will be 2 executions with a failed.
 
 ```golang
 
-	retryable := NewClient()
+	retryable :=retryable.NewClient()
 	retryable.maxAttempts = 2
 	retryable.delay =time.Second * 5
 
-    // OR
+	// OR
 	// retryable := &Config{
 	// 	maxAttempts: 2,
 	// 	delay:       time.Second * 5,
@@ -80,11 +84,11 @@ Final result will be 1 execution with a failed.
 
 ```golang
 
-	retryable := NewClient()
+	retryable := retryable.NewClient()
 	retryable.maxAttempts = 2
 	retryable.delay =time.Second * 5
 
-    // OR
+	// OR
 	// retryable := &Config{
 	// 	maxAttempts: 2,
 	// 	delay:       time.Second * 5,
