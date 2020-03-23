@@ -71,7 +71,7 @@ func TestMaxAttemptsExhausted(t *testing.T) {
 func TestMaxAttemptsExhaustedWithDefaultsDelayOverride(t *testing.T) {
 
 	retryable := NewClient()
-	retryable.delay = time.Second * 1
+	retryable.SetDelay(time.Second * 1)
 
 	err := retryable.Try(func() error {
 		return errors.New("It failed")

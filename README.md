@@ -21,8 +21,8 @@ err := retryable.NewClient().Try(func() error {
 
 ### Override defaults
 
-- _(Optional)_ Set a `maxAttempts` value which is to be used in the retryable logic
-- _(Optional)_ Set a `delay` value to wait before executing the retryable function
+- _(Optional)_ Set a `maxAttempts` value which is to be used in the retryable logic `#SetMaxAttempts(int)`
+- _(Optional)_ Set a `delay` value to wait before executing the retryable function `#SetDelay(time.Duration)`
 
 ## Sample 1 
 
@@ -34,8 +34,8 @@ Final result will be 1 execution with a success.
 ```golang
 
 	retryable := retryable.NewClient()
-	retryable.maxAttempts = 2
-	retryable.delay =time.Second * 5
+	retryable.SetMaxAttempts(2)
+	retryable.SetDelay(time.Second * 5)
 
 	// OR
 	// retryable := &Config{
@@ -58,9 +58,9 @@ Final result will be 2 executions with a failed.
 
 ```golang
 
-	retryable :=retryable.NewClient()
-	retryable.maxAttempts = 2
-	retryable.delay =time.Second * 5
+	retryable := retryable.NewClient()
+	retryable.SetMaxAttempts(2)
+	retryable.SetDelay(time.Second * 5)
 
 	// OR
 	// retryable := &Config{
@@ -85,8 +85,8 @@ Final result will be 1 execution with a failed.
 ```golang
 
 	retryable := retryable.NewClient()
-	retryable.maxAttempts = 2
-	retryable.delay =time.Second * 5
+	retryable.SetMaxAttempts(2)
+	retryable.SetDelay(time.Second * 5)
 
 	// OR
 	// retryable := &Config{
